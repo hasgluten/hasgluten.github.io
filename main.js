@@ -34380,9 +34380,10 @@ var EmbedWikipedia = React.createClass({displayName: 'EmbedWikipedia',
     },
 
     render: function() {
-        var url = 'http://en.wikipedia.org/wiki/' + this.props.src.replace(' ', '_').toLowerCase();
+        var name = this.props.src.replace(' ', '_').toLowerCase(),
+            url = 'http://en.wikipedia.org/wiki/' + name;
         return (
-            React.DOM.div(null, 
+            React.DOM.div({'data-src': name}, 
                 React.DOM.a({className: "embedly-card", href: url})
             )
         );
@@ -34465,6 +34466,7 @@ var FilterableProductTable = React.createClass({displayName: 'FilterableProductT
         this.setState({
             filterText: filterText
         });
+        ga('send', 'event', 'main', 'search', filterText);
     },
     
     render: function() {
@@ -34558,8 +34560,12 @@ var React = require('react')
   }
   ;
 
+function gaPageView() {
+  ga('send', 'pageview', this.getCurrentPath());
+}
+
 module.exports = (
-  Routes({location: "history", scrollBehavior: "scrollToTop"}, 
+  Routes({location: "history", scrollBehavior: "scrollToTop", onChange: gaPageView}, 
     Route({name: "root", path: "/", handler: Layout, pages: pages}, 
       Route({name: "home", handler: Home}), 
       Route({name: "page", path: "page-:name", handler: CntPage, pages: pages}), 

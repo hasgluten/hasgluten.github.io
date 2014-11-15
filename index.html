@@ -18,10 +18,16 @@
       }
     </script>
     <style>
+      .mui-predefined-layout-1 .mui-app-bar { position: relative; }
+      .mui-predefined-layout-1 .mui-app-content-canvas { padding-top: 0; }
       .mui-input input:focus + .mui-input-placeholder, .mui-input input:valid + .mui-input-placeholder { color: black; }
-      table { max-height: 300px; overflow: hidden; display: block; }
+      table { max-height: 300px; overflow: hidden; display: block; margin-bottom: 60px; }
       tr { height: 25px; }
       #main { width: 300px; margin: 0 auto; }
+      @media (max-width: 480px) {
+        .full-width-section { padding: 20px 10px; }
+      }
+      .mui-input input[type='text'], .mui-input input[type='password'] { width: 300px; }
     </style>
   </head>
   <body>
@@ -32,6 +38,8 @@
         embedly('on', 'card.rendered', function(iframe){
           if (!iframe.baseURI)
             $('.embedly-card').parent().html('<em>no info</em>');
+          else
+            ga('send', 'pageview', '/wikipedia/'+$(iframe).parent().data('src'));
         });
     </script>
   </body>

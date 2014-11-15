@@ -1,4 +1,4 @@
 HasGluten
 =========
 
-Has gluten in it?! https://hasgluten.com
+Has gluten in it?! http://hasgluten.com
