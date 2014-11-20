@@ -36,10 +36,21 @@
     <script src="main.js"></script>
     <script>
         embedly('on', 'card.rendered', function(iframe){
-          if (!iframe.baseURI)
-            $('.embedly-card').parent().html('<em>no info</em>');
-          else
-            ga('send', 'pageview', '/wikipedia/'+$(iframe).parent().data('src'));
+          if (!iframe.baseURI) {
+              var parent = $('.embedly-card').parent();
+              if (parent.data('lang') == 'en') {
+                  parent.html('<em>'+parent.data('none')+'</em>');
+              } else {
+                  var url = 'http://en.wikipedia.org/wiki/' + parent.data('key'),
+                      a = $('<a class="embedly-card" href="'+url+'"></a>');
+                  parent.data('lang', 'en');
+                  parent.html(a);
+                  embedly('card', '.embedly-card');
+              }
+          }
+          else {
+              if (typeof ga !== 'undefined') ga('send', 'pageview', '/wikipedia/'+$(iframe).parent.data('lang')+'/'+$(iframe).parent.data('src'));
+          }
         });
     </script>
   </body>
