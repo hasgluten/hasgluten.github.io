@@ -1,4 +1,5 @@
 HasGluten
 =========
 
-Has gluten in it?! http://hasgluten.com
+Quick and Accurate Gluten-Free Foods List
+http://hasgluten.com
